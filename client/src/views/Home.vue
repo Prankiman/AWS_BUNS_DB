@@ -90,25 +90,10 @@
     <section id="bread">
       <h1>Our Bread Collection</h1>
       <div id="container">
-        <div class="bread">
-          <img src="../assets/home/rolls-min.jpg" alt="Bread type">
-          <h1>Rolls</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan lacus vel facilisis volutpat est velit. Donec et odio pellentesque diam volutpat commodo. Quam vulputate dignissim suspendisse in.</p>
-        </div>
-        <div class="bread">
-          <img src="../assets/home/challah-min.jpg" alt="Bread type">
-          <h1>Challah</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan lacus vel facilisis volutpat est velit. Donec et odio pellentesque diam volutpat commodo. Quam vulputate dignissim suspendisse in.</p>
-        </div>
-        <div class="bread">
-          <img src="../assets/home/french-bread-min.jpg" alt="Bread type">
-          <h1>French Bread</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan lacus vel facilisis volutpat est velit. Donec et odio pellentesque diam volutpat commodo. Quam vulputate dignissim suspendisse in.</p>
-        </div>
-        <div class="bread">
-          <img src="../assets/home/croissant-min.jpg" alt="Bread type">
-          <h1>Croissant</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan lacus vel facilisis volutpat est velit. Donec et odio pellentesque diam volutpat commodo. Quam vulputate dignissim suspendisse in.</p>
+        <div class="bread" v-for="bun in state.edibleBuns" :key="bun.id">
+          <img :src="bun.image_url" alt="Bread type">
+          <h1>{{bun.type[0].toUpperCase() + bun.type.slice(1, bun.type.length)}}</h1>
+          <p>{{bun.ingridients}}</p>
         </div>
       </div>
     </section>
@@ -144,8 +129,24 @@
 </template>
 
 <script>
+import { reactive } from 'vue';
+import axios from 'axios';
 
 export default {
+  setup() {
+    let state = reactive({
+      edibleBuns: []
+    });
+
+    (async() => {
+      let res = await axios.get('http://localhost:5000/edibleBuns');
+      state.edibleBuns = res.data.items
+    })();
+
+    return {
+      state
+    }
+  }
 }
 </script>
 

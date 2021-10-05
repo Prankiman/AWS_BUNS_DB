@@ -1,17 +1,21 @@
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = 5000;
+
+app.use(cors())
 
 app.listen(PORT, () => console.log("Listening on port", PORT));
 require("dotenv").config({ path: "./.env" })
 
  const bodyparser = require('body-parser');
- const playerRoutes= require('./api/routes/players');
+ const edibleBunsRoutes= require('./api/routes/edibleBuns');
 
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
- app.use('/players', playerRoutes);
+
+app.use('/edibleBuns', edibleBunsRoutes);
 app.use('',(req, res, next) => {
     res.status(200).json({
         message: 'Working'

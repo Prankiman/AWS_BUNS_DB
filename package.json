@@ -9,7 +9,7 @@
   "devDependencies": {},
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "npm run dev --ignore 'client/'",
+    "server": "npm run dev --prefix API",
     "client": "npm run serve --prefix client"
   },
   "author": "",
