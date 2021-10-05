@@ -1,0 +1,17 @@
+{
+  "name": "aws_buns_db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm run dev --ignore 'client/'",
+    "client": "npm run serve --prefix client"
+  },
+  "author": "",
+  "license": "ISC"
+}
