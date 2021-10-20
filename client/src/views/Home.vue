@@ -93,7 +93,10 @@
         <div class="bread" v-for="bun in state.edibleBuns" :key="bun.id">
           <img :src="bun.image_url" alt="Bread type">
           <h1>{{bun.type[0].toUpperCase() + bun.type.slice(1, bun.type.length)}}</h1>
-          <p>{{bun.ingridients}}</p>
+          <p>ingridients : </p>
+          <div v-for="ingr in bun.ingridients" :key="ingr">
+            <p>{{ingr}}</p>
+          </div>
         </div>
       </div>
     </section>
